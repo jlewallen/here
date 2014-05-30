@@ -22,6 +22,7 @@ public class Main extends Application<ProfilesConfiguration> {
       JmxReporter.forRegistry(environment.metrics()).build().start();
 
       environment.jersey().register(DiagnosticsResource.class);
+      environment.jersey().register(new ProfilesModule(environment, configuration.getDatabase()).profilesResource());
    }
 }
 
