@@ -8,6 +8,7 @@ server:
 
 eurekaServer:
     defaultServiceUrl: http://127.0.0.1:90/eureka/v2/
+    enableSelfPreservation: false
 
 zookeeper:
     server: true
