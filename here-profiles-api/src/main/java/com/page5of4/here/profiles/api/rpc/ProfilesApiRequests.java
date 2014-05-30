@@ -5,11 +5,13 @@ import com.page5of4.here.profiles.api.dto.ProfileDto;
 import com.page5of4.here.profiles.api.dto.SignupInfoDto;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 import java.util.UUID;
 
 public interface ProfilesApiRequests {
@@ -26,4 +28,12 @@ public interface ProfilesApiRequests {
    @Path("/auth")
    @Consumes(MediaType.APPLICATION_JSON)
    ProfileDto authenticate(CredentialsDto credentials);
+
+   @DELETE
+   @Path("/profiles")
+   Integer deleteAll();
+
+   @GET
+   @Path("/profiles")
+   List<ProfileDto> getProfiles();
 }
