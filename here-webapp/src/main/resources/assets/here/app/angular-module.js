@@ -4,6 +4,7 @@ define(['lib/angular/angular',
 		'lib/angular/ui-bootstrap',
 		'shared/modules/repositories-module',
 		'shared/services/url-helper',
+		'shared/services/authentication',
 		'lib/less'
 	],
 	function(angular) {

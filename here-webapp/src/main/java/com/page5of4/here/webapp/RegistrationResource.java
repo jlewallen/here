@@ -1,5 +1,6 @@
 package com.page5of4.here.webapp;
 
+import com.page5of4.here.common.Identity;
 import com.page5of4.here.profiles.api.commands.SignupCommand;
 import com.page5of4.here.profiles.api.commands.ViewProfileCommand;
 import com.page5of4.here.profiles.api.dto.ProfileDto;
@@ -11,7 +12,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.UUID;
 
 @Path("profile")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,7 +22,7 @@ public class RegistrationResource {
    }
 
    @GET
-   public ProfileDto profile(@HeaderParam("Identity") String identity) {
-      return new ViewProfileCommand(UUID.fromString(identity)).execute();
+   public ProfileDto profile(@HeaderParam(Identity.HEADER) String token) {
+      return new ViewProfileCommand(Identity.get(token).getId()).execute();
    }
 }

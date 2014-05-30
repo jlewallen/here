@@ -20,4 +20,7 @@ public interface ProfilesRepository {
 
    @SqlQuery("SELECT * FROM profiles")
    List<Profile> getAll();
+
+   @SqlUpdate("DELETE FROM profiles")
+   void deleteAll();
 }

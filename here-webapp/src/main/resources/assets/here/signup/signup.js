@@ -1,8 +1,8 @@
 'use strict';
 define(['text!./signup.html', 'layout/default-layout', 'app/angular-module'], function(template, layout, module) {
-	signupController.$inject = ['$scope', '$state', 'defaultResource'];
+	signupController.$inject = ['$scope', '$state', 'defaultResource', 'authenticationTokenRepository'];
 
-	function signupController($scope, $state, defaultResource) {
+	function signupController($scope, $state, defaultResource, authenticationTokenRepository) {
 		$scope.signupInfo = {
 			firstName : 'John',
 			lastName : 'Doe',
@@ -11,7 +11,11 @@ define(['text!./signup.html', 'layout/default-layout', 'app/angular-module'], fu
 		};
 		$scope.signup = function() {
 			defaultResource("profile").post($scope.signupInfo).then(function(id) {
-				console.log(id);
+				authenticationTokenRepository.saveToken(id).then(function() {
+					defaultResource("profile").get().then(function(profile) {
+						$state.go("dashboard");
+					});
+				});
 			});
 		};
 	}
