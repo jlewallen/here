@@ -37,6 +37,8 @@ dependencies {
     compile 'com.page5of4.codon:codon-discovery-activemq:0.1.0-SNAPSHOT'
 
     compile project(':here-infrastructure')
+    compile project(':here-profiles-api')
 
     testCompile 'junit:junit:4.11'
+    testCompile 'org.assertj:assertj-core:1.6.0'
 }
