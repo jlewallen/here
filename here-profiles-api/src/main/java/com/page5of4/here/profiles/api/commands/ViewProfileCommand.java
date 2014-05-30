@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ViewProfileCommand extends TenacityCommand<ProfileDto> {
    private final UUID id;
 
-   protected ViewProfileCommand(UUID id) {
+   public ViewProfileCommand(UUID id) {
       super(ProfilesCommandKeys.PRFL_VIEW_PROFILE);
       this.id = id;
    }

@@ -3,7 +3,7 @@ package com.page5of4.here.profiles.api.dto;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-public class SignUpInfoDto {
+public class SignupInfoDto {
    private UUID id;
    @NotNull
    private String firstName;

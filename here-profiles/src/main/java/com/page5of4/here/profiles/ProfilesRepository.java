@@ -5,6 +5,8 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import java.util.List;
+
 @RegisterMapper(ProfileMapper.class)
 public interface ProfilesRepository {
    @SqlUpdate("INSERT INTO profiles (id, first_name, last_name, email, password) values (:id, :first_name, :last_name, :email, :password)")
@@ -15,4 +17,7 @@ public interface ProfilesRepository {
 
    @SqlQuery("SELECT * FROM profiles WHERE id = :id")
    Profile getById(@Bind("id") String id);
+
+   @SqlQuery("SELECT * FROM profiles")
+   List<Profile> getAll();
 }

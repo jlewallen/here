@@ -1,21 +1,23 @@
 package com.page5of4.here.profiles.api.commands;
 
-import com.page5of4.here.profiles.api.dto.SignUpInfoDto;
+import com.page5of4.here.profiles.api.dto.SignupInfoDto;
 import com.page5of4.here.profiles.api.rpc.RequestFactory;
 import com.yammer.tenacity.core.TenacityCommand;
 
 import java.util.UUID;
 
-public class SignUpCommand extends TenacityCommand<UUID> {
-   private final SignUpInfoDto signUpInfo;
+public class SignupCommand extends TenacityCommand<SignupInfoDto> {
+   private final SignupInfoDto signupInfo;
 
-   protected SignUpCommand(SignUpInfoDto signUpInfo) {
+   public SignupCommand(SignupInfoDto signupInfo) {
       super(ProfilesCommandKeys.PRFL_SIGNUP);
-      this.signUpInfo = signUpInfo;
+      this.signupInfo = signupInfo;
+      this.signupInfo.setId(UUID.randomUUID());
    }
 
    @Override
-   protected UUID run() throws Exception {
-      return RequestFactory.get().signUp(signUpInfo);
+   protected SignupInfoDto run() throws Exception {
+      RequestFactory.get().signup(signupInfo);
+      return signupInfo;
    }
 }

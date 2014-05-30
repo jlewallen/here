@@ -1,3 +1,8 @@
+About
+================================
+
+Target Features
+================================
 Profiles Service
   Create Profile
   Create/View/Modify Profile
@@ -13,3 +18,7 @@ Places Service
 
 Checkin Service
   Checkin
+
+Notes
+================================
+Be sure to enable annotation processing in IntelliJ, it's disabled by default.

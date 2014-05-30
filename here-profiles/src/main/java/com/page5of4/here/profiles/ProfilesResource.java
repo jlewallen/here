@@ -1,11 +1,13 @@
 package com.page5of4.here.profiles;
 
-import com.page5of4.here.profiles.api.dto.SignUpInfoDto;
+import com.page5of4.here.profiles.api.dto.SignupInfoDto;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 import java.util.UUID;
 
 @Path("profiles")
@@ -17,9 +19,14 @@ public class ProfilesResource {
       this.repository = repository;
    }
 
+   @GET
+   public List<Profile> all() {
+      return repository.getAll();
+   }
+
    @POST
-   public UUID signUp(SignUpInfoDto signUpInfo) {
-      repository.add(signUpInfo.getId().toString(), signUpInfo.getFirstName(), signUpInfo.getLastName(), signUpInfo.getEmail(), signUpInfo.getPassword());
-      return signUpInfo.getId();
+   public UUID signup(SignupInfoDto signupInfo) {
+      repository.add(signupInfo.getId().toString(), signupInfo.getFirstName(), signupInfo.getLastName(), signupInfo.getEmail(), signupInfo.getPassword());
+      return signupInfo.getId();
    }
 }

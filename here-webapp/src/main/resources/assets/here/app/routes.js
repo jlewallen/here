@@ -14,6 +14,7 @@ define(function(require) {
 		$urlRouterProvider.otherwise("/dashboard");
 
 		registerControllers(require('layout/default-layout'));
+		registerControllers(require('signup/signup'));
 		registerControllers(require('dashboard/dashboard'));
 	}]);
 });

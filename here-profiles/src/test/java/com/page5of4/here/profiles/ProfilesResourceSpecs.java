@@ -1,6 +1,6 @@
 package com.page5of4.here.profiles;
 
-import com.page5of4.here.profiles.api.dto.SignUpInfoDto;
+import com.page5of4.here.profiles.api.dto.SignupInfoDto;
 import com.page5of4.here.profiles.tests.ProfilesSpecsModule;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,17 +21,17 @@ public class ProfilesResourceSpecs {
    }
 
    public static class when_signing_up extends ProfilesResourceSpecs {
-      private SignUpInfoDto info;
+      private SignupInfoDto info;
 
       @Before
       public void before() {
-         info = new SignUpInfoDto();
+         info = new SignupInfoDto();
          info.setId(UUID.randomUUID());
          info.setFirstName("Jacob");
          info.setLastName("Lewallen");
          info.setEmail("test@test.com");
          info.setPassword("asdfasdf");
-         profilesResource.signUp(info);
+         profilesResource.signup(info);
       }
 
       @Test
