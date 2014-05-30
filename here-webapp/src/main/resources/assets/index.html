@@ -2,10 +2,17 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+        <link rel="stylesheet" href="/assets/here/app.less" type="text/less"/>
+
+        <script type="text/javascript" src="/assets/here/lib/modernizr.js"></script>
+        <script type="text/javascript" src="/assets/here/lib/es5-shim.js"></script>
+
         <title>Here</title>
     </head>
     <body ng-cloak>
         <div ui-view>
         </div>
+        <script type="text/javascript" src="/assets/here/lib/require.js"></script>
+        <script>require(["/assets/here/app/main.js"]);</script>
     </body>
 </html>
