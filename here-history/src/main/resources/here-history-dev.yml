@@ -1,0 +1,27 @@
+server:
+    applicationConnectors:
+    - type: http
+      port: 9004
+    adminConnectors:
+    - type: http
+      port: 9005
+
+database:
+    driverClass: org.h2.Driver
+    user: sa
+    password: sa
+    url: jdbc:h2:mem:here-history
+
+eureka:
+    name: HERE
+    port: 9004
+    vipAddress: here-history.page5of4.com
+    defaultServiceUrl: http://127.0.0.1:90/eureka/v2/
+
+logging:
+    loggers:
+        org.apache.zookeeper.ZooKeeper: WARN
+        org.apache.camel.spring: WARN
+        org.springframework: WARN
+        com.page5of4.codon: INFO
+        org.apache.activemq.network: ERROR

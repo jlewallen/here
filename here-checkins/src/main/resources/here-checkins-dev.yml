@@ -1,0 +1,27 @@
+server:
+    applicationConnectors:
+    - type: http
+      port: 9006
+    adminConnectors:
+    - type: http
+      port: 9007
+
+database:
+    driverClass: org.h2.Driver
+    user: sa
+    password: sa
+    url: jdbc:h2:mem:here-checkins
+
+eureka:
+    name: HERE
+    port: 9006
+    vipAddress: here-checkins.page5of4.com
+    defaultServiceUrl: http://127.0.0.1:90/eureka/v2/
+
+logging:
+    loggers:
+        org.apache.zookeeper.ZooKeeper: WARN
+        org.apache.camel.spring: WARN
+        org.springframework: WARN
+        com.page5of4.codon: INFO
+        org.apache.activemq.network: ERROR

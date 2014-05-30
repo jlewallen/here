@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.page5of4.here.webapp.Main'
+
+configurations {
+    capsule
+}
+
+run {
+    args "server", "build/resources/main/here-webapp-dev.yml"
+}
+
+dependencies {
+    compile 'io.dropwizard:dropwizard-core:0.7.0'
+    compile 'io.dropwizard:dropwizard-assets:0.7.0'
+
+    compile 'com.squareup.dagger:dagger:1.1.0'
+    compile 'com.squareup.dagger:dagger-compiler:1.1.0'
+
+    compile 'com.netflix.feign:feign-core:6.1.2'
+    compile 'com.netflix.feign:feign-jaxrs:6.1.2'
+    compile 'com.netflix.feign:feign-jackson:6.1.2'
+    compile "com.netflix.ribbon:ribbon-core:0.2.1"
+    compile "com.netflix.ribbon:ribbon-httpclient:0.2.1"
+    compile "com.netflix.ribbon:ribbon-eureka:0.2.1"
+
+    capsule 'co.paralleluniverse:capsule:0.4.0'
+
+    compile 'com.yammer.tenacity:tenacity-core:0.3.0'
+
+    compile 'com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT'
+
+    compile project(':here-infrastructure')
+    compile project(':here-places-api')
+	compile project(':here-profiles-api')
+	compile project(':here-history-api')
+	compile project(':here-checkins-api')
+
+    testCompile 'junit:junit:4.11'
+}

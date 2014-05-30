@@ -1,0 +1,11 @@
+subprojects {
+    apply plugin: 'maven'
+
+    group = 'com.page5of4.here'
+    version = '0.1.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
