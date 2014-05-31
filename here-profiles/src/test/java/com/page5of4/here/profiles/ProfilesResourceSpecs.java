@@ -1,7 +1,7 @@
 package com.page5of4.here.profiles;
 
 import com.page5of4.here.profiles.api.dto.SignupInfoDto;
-import com.page5of4.here.profiles.tests.ProfilesSpecsModule;
+import com.page5of4.here.profiles.tests.ProfilesDeps;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,14 +10,11 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfilesResourceSpecs {
-   protected ProfilesResource profilesResource;
-   protected ProfilesRepository repository;
+   protected ProfilesDeps deps;
 
    @Before
    public void setup() {
-      ProfilesSpecsModule module = new ProfilesSpecsModule();
-      repository = module.profilesRepository(module.dbi());
-      profilesResource = module.profilesResource();
+      deps = ProfilesDeps.get();
    }
 
    public static class when_signing_up extends ProfilesResourceSpecs {
@@ -31,12 +28,12 @@ public class ProfilesResourceSpecs {
          info.setLastName("Lewallen");
          info.setEmail("test@test.com");
          info.setPassword("asdfasdf");
-         profilesResource.signup(info);
+         deps.getProfilesResource().signup(info);
       }
 
       @Test
       public void should_add_the_user_and_they_should_be_retrievable() {
-         Profile saved = repository.getById(info.getId().toString());
+         Profile saved = deps.getProfilesRepository().getById(info.getId().toString());
          assertThat(saved).isNotNull();
          assertThat(saved.getFirstName()).isEqualTo("Jacob");
          assertThat(saved.getLastName()).isEqualTo("Lewallen");

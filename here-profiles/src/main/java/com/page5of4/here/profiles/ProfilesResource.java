@@ -2,6 +2,7 @@ package com.page5of4.here.profiles;
 
 import com.page5of4.here.profiles.api.dto.SignupInfoDto;
 
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class ProfilesResource {
    private final ProfilesRepository repository;
 
+   @Inject
    public ProfilesResource(ProfilesRepository repository) {
       this.repository = repository;
    }
