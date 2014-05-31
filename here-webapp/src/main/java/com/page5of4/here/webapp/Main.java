@@ -36,6 +36,7 @@ public class Main extends Application<WebAppConfiguration> {
       environment.jersey().register(AvailablePlacesResource.class);
       environment.jersey().register(BusinessOwnerResource.class);
       environment.jersey().register(CheckinResource.class);
+      environment.jersey().register(MyCheckinsResource.class);
 
       environment.jersey().getResourceConfig().getContainerRequestFilters().add(readyFilter);
    }

@@ -33,6 +33,12 @@ public class CheckinsResource {
       return repository.getById(id.toString());
    }
 
+   @GET
+   @Path("profile/{profileId}")
+   public List<Checkin> checkinsForProfile(@PathParam("profileId") UUID profileId) {
+      return repository.getByProfileId(profileId.toString());
+   }
+
    @POST
    public Checkin checkin(Checkin checkin) {
       repository.add(checkin.getId().toString(), new Timestamp(new Date().getTime()), checkin.getPlaceId().toString(), checkin.getProfileId().toString());

@@ -18,4 +18,7 @@ public interface CheckinsRepository {
 
    @SqlQuery("SELECT * FROM checkins")
    List<Checkin> getAll();
+
+   @SqlQuery("SELECT * FROM checkins WHERE profile_id = :profileId")
+   List<Checkin> getByProfileId(@Bind("profileId") String profileId);
 }

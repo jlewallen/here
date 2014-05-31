@@ -8,7 +8,13 @@ define(['text!./dashboard.html', 'layout/default-layout', 'app/angular-module'],
 		});
 
 		defaultResource("available-places").get().then(function(places) {
+			console.log(places);
 			$scope.places = places;
+		});
+
+		defaultResource("profile", "checkins").get().then(function(checkins) {
+			console.log(checkins);
+			$scope.checkins = checkins;
 		});
 
 		$scope.checkin = function(place) {

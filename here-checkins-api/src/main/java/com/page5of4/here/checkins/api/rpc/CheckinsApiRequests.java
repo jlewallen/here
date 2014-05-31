@@ -24,5 +24,9 @@ public interface CheckinsApiRequests {
    @GET
    @Path("/checkins")
    List<CheckinDto> getCheckins();
+
+   @GET
+   @Path("/checkins/profile/{profileId}")
+   List<CheckinDto> getCheckinsByProfile(@PathParam("profileId") UUID profileId);
 }
 
