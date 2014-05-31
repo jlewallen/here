@@ -4,7 +4,8 @@ import com.codahale.metrics.JmxReporter;
 import com.netflix.config.ConfigurationManager;
 import com.page5of4.dropwizard.EurekaClientBundle;
 import com.page5of4.here.common.DiagnosticsResource;
-import com.page5of4.here.profiles.api.rpc.RequestFactory;
+import com.page5of4.here.places.api.rpc.PlacesRequestFactory;
+import com.page5of4.here.profiles.api.rpc.ProfilesRequestFactory;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -28,14 +29,19 @@ public class Main extends Application<WebAppConfiguration> {
       Properties properties = new Properties();
       properties.put("here-profiles-api.ribbon.NIWSServerListClassName", "com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList");
       properties.put("here-profiles-api.ribbon.DeploymentContextBasedVipAddresses", "here-profiles.page5of4.com");
+      properties.put("here-places-api.ribbon.NIWSServerListClassName", "com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList");
+      properties.put("here-places-api.ribbon.DeploymentContextBasedVipAddresses", "here-places.page5of4.com");
       ConfigurationManager.loadProperties(properties);
 
       JmxReporter.forRegistry(environment.metrics()).build().start();
 
-      new RequestFactory();
+      new ProfilesRequestFactory();
+      new PlacesRequestFactory();
 
       environment.jersey().register(DiagnosticsResource.class);
       environment.jersey().register(RegistrationResource.class);
+      environment.jersey().register(AvailablePlacesResource.class);
+      environment.jersey().register(BusinessOwnerResource.class);
    }
 }
 

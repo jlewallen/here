@@ -1,7 +1,7 @@
 package com.page5of4.here.profiles.api.commands;
 
 import com.page5of4.here.profiles.api.dto.ProfileDto;
-import com.page5of4.here.profiles.api.rpc.RequestFactory;
+import com.page5of4.here.profiles.api.rpc.ProfilesRequestFactory;
 import com.yammer.tenacity.core.TenacityCommand;
 
 import java.util.UUID;
@@ -16,6 +16,6 @@ public class ViewProfileCommand extends TenacityCommand<ProfileDto> {
 
    @Override
    protected ProfileDto run() throws Exception {
-      return RequestFactory.get().viewProfile(id);
+      return ProfilesRequestFactory.get().viewProfile(id);
    }
 }

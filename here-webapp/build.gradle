@@ -31,6 +31,8 @@ dependencies {
 
     compile 'com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT'
 
+    compile 'com.github.javafaker:javafaker:0.3'
+
     compile project(':here-infrastructure')
     compile project(':here-places-api')
 	compile project(':here-profiles-api')

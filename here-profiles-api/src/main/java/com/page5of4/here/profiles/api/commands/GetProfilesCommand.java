@@ -1,7 +1,7 @@
 package com.page5of4.here.profiles.api.commands;
 
 import com.page5of4.here.profiles.api.dto.ProfileDto;
-import com.page5of4.here.profiles.api.rpc.RequestFactory;
+import com.page5of4.here.profiles.api.rpc.ProfilesRequestFactory;
 import com.yammer.tenacity.core.TenacityCommand;
 
 import java.util.List;
@@ -13,6 +13,6 @@ public class GetProfilesCommand extends TenacityCommand<List<ProfileDto>> {
 
    @Override
    protected List<ProfileDto> run() throws Exception {
-      return RequestFactory.get().getProfiles();
+      return ProfilesRequestFactory.get().getProfiles();
    }
 }

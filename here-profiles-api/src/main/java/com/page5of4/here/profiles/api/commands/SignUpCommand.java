@@ -1,7 +1,7 @@
 package com.page5of4.here.profiles.api.commands;
 
 import com.page5of4.here.profiles.api.dto.SignupInfoDto;
-import com.page5of4.here.profiles.api.rpc.RequestFactory;
+import com.page5of4.here.profiles.api.rpc.ProfilesRequestFactory;
 import com.yammer.tenacity.core.TenacityCommand;
 
 import java.util.UUID;
@@ -17,7 +17,7 @@ public class SignupCommand extends TenacityCommand<SignupInfoDto> {
 
    @Override
    protected SignupInfoDto run() throws Exception {
-      RequestFactory.get().signup(signupInfo);
+      ProfilesRequestFactory.get().signup(signupInfo);
       return signupInfo;
    }
 }
