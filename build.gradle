@@ -1,3 +1,35 @@
+def FeignVersion = "6.1.2"
+def RibbonVersion = "0.3.12"
+def DropwizardVersion = "0.7.0"
+
+def apiProjects = {
+  it.name.endsWith('-api')
+}
+
+def webAppProjects = {
+  it.name.endsWith('-webapp')
+}
+
+def middleTierProjects = {
+  !it.name.endsWith('-api') && !it.name.endsWith('-infrastructure') && !it.name.endsWith('-webapp') 
+}
+
+ext.libraries = [
+  feign: [
+    "com.netflix.feign:feign-core:$FeignVersion",
+    "com.netflix.feign:feign-jaxrs:$FeignVersion",
+    "com.netflix.feign:feign-jackson:$FeignVersion",
+    "com.netflix.feign:feign-ribbon:$FeignVersion",
+    "com.netflix.ribbon:ribbon-core:$RibbonVersion",
+    "com.netflix.ribbon:ribbon-httpclient:$RibbonVersion",
+    "com.netflix.ribbon:ribbon-eureka:$RibbonVersion"
+  ],
+  testing: [
+    "junit:junit:4.11",
+    "org.assertj:assertj-core:1.6.0"
+  ]
+]
+
 subprojects {
     apply plugin: 'maven'
 
@@ -8,4 +40,77 @@ subprojects {
         mavenLocal()
         mavenCentral()
     }
+}
+
+configure(subprojects.findAll(middleTierProjects)) {
+  apply plugin: 'java'
+  apply plugin: 'application'
+
+  dependencies {
+    compile project(':here-infrastructure')
+
+    compile "io.dropwizard:dropwizard-core:$DropwizardVersion"
+
+    compile libraries.feign
+
+    compile "com.squareup.dagger:dagger-compiler:1.1.0"
+
+    compile "io.dropwizard:dropwizard-db:$DropwizardVersion"
+    compile "io.dropwizard:dropwizard-jdbi:$DropwizardVersion"
+    compile "org.jooq:jooq:3.3.2"
+    runtime "com.h2database:h2:1.4.178"
+    compile "org.slf4j:log4j-over-slf4j:1.6.1"
+    compile "com.yammer.tenacity:tenacity-core:0.3.0"
+
+    compile "com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT"
+    compile "com.page5of4.dropwizard.messaging:dropwizard-activemq:0.1.0-SNAPSHOT"
+    compile "com.page5of4.codon:codon-dropwizard:0.1.0-SNAPSHOT"
+    compile "com.page5of4.codon:codon-discovery:0.1.0-SNAPSHOT"
+    compile "com.page5of4.codon:codon-discovery-activemq:0.1.0-SNAPSHOT"
+
+    testCompile "com.sun.jersey:jersey-test-framework:1.18.1"
+    testCompile "io.dropwizard:dropwizard-testing:$DropwizardVersion"
+    testCompile libraries.testing
+  }
+}
+
+configure(subprojects.findAll(webAppProjects)) {
+  apply plugin: 'java'
+  apply plugin: 'application'
+
+  dependencies {
+    compile "io.dropwizard:dropwizard-core:$DropwizardVersion"
+    compile "io.dropwizard:dropwizard-assets:$DropwizardVersion"
+
+    compile "com.squareup.dagger:dagger:1.1.0"
+    compile "com.squareup.dagger:dagger-compiler:1.1.0"
+    compile "com.yammer.tenacity:tenacity-core:0.3.1"
+    compile "com.github.javafaker:javafaker:0.3"
+
+    compile "com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT"
+
+    compile project(':here-infrastructure')
+    compile project(':here-places-api')
+    compile project(':here-profiles-api')
+    compile project(':here-history-api')
+    compile project(':here-checkins-api')
+
+    testCompile libraries.testing
+  }
+}
+
+configure(subprojects.findAll(apiProjects)) {
+  apply plugin: 'java'
+
+  dependencies {
+    compile libraries.feign
+
+    compile project(':here-infrastructure')
+
+    compile "com.netflix.archaius:archaius-core:0.5.11"
+
+    compile "com.yammer.tenacity:tenacity-core:0.3.0"
+
+    testCompile libraries.testing
+  }
 }

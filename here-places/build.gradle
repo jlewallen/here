@@ -1,46 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'application'
-
 mainClassName = 'com.page5of4.here.places.Main'
 
 run {
-    args "server", "build/resources/main/here-places-dev.yml"
+  args "server", "build/resources/main/here-places-dev.yml"
 }
 
 dependencies {
-    compile 'io.dropwizard:dropwizard-core:0.7.0'
-
-    compile 'com.netflix.feign:feign-core:6.1.2'
-    compile 'com.netflix.feign:feign-jaxrs:6.1.2'
-    compile 'com.netflix.feign:feign-jackson:6.1.2'
-
-    compile 'com.squareup.dagger:dagger-compiler:1.1.0'
-
-    compile 'io.dropwizard:dropwizard-db:0.7.0'
-    compile 'io.dropwizard:dropwizard-jdbi:0.7.0'
-    compile 'org.jooq:jooq:3.3.2'
-    runtime 'com.h2database:h2:1.4.178'
-
-    compile "com.google.guava:guava:14.0.1"
-    compile "com.netflix.karyon:karyon-core:1.0.19"
-    compile "com.netflix.karyon:karyon-extensions:1.0.19"
-    compile "com.netflix.archaius:archaius-core:0.5.11"
-    compile "com.netflix.eureka:eureka-core:1.1.132"
-    compile "com.netflix.eureka:eureka-client:1.1.132"
-    compile 'org.slf4j:log4j-over-slf4j:1.6.1'
-
-    compile 'com.yammer.tenacity:tenacity-core:0.3.0'
-
-    compile 'com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT'
-
-    compile 'com.page5of4.dropwizard.messaging:dropwizard-activemq:0.1.0-SNAPSHOT'
-    compile 'com.page5of4.codon:codon-dropwizard:0.1.0-SNAPSHOT'
-    compile 'com.page5of4.codon:codon-discovery:0.1.0-SNAPSHOT'
-    compile 'com.page5of4.codon:codon-discovery-activemq:0.1.0-SNAPSHOT'
-
-    compile project(':here-infrastructure')
-
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.assertj:assertj-core:1.6.0'
-    testCompile 'com.sun.jersey:jersey-test-framework:1.18.1'
+  compile project(':here-places-api')
 }

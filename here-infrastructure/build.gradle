@@ -5,29 +5,27 @@ apply plugin: 'jetty'
 mainClassName = 'com.page5of4.here.infrastructure.Main'
 
 configurations {
-    dashboard
+  dashboard
 }
 
 configurations.all {
-    exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+  exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
 }
 
 run {
-    args "server", "build/resources/main/here-infrastructure-dev.yml"
+  args "server", "build/resources/main/here-infrastructure-dev.yml"
 }
 
 dependencies {
-    dashboard  'com.netflix.hystrix:hystrix-dashboard:1.4.0-RC4'
+  dashboard  'com.netflix.hystrix:hystrix-dashboard:1.4.0-RC4'
 
-    compile 'io.dropwizard:dropwizard-core:0.7.0'
-    compile 'com.page5of4.dropwizard:dropwizard-eureka-server:0.1.0-SNAPSHOT'
-    compile 'com.page5of4.dropwizard:dropwizard-zookeeper:0.1.0-SNAPSHOT'
-
-    testCompile 'junit:junit:4.11'
+  compile 'io.dropwizard:dropwizard-core:0.7.0'
+  compile 'com.page5of4.dropwizard:dropwizard-eureka-server:0.1.0-SNAPSHOT'
+  compile 'com.page5of4.dropwizard:dropwizard-zookeeper:0.1.0-SNAPSHOT'
 }
 
 task dashboard(type: JettyRunWar) {
-    webApp = configurations.dashboard.find { it.name.contains("hystrix-dashboard") }
-    httpPort = 7676
-    contextPath = "hystrix"
+  webApp = configurations.dashboard.find { it.name.contains("hystrix-dashboard") }
+  httpPort = 7676
+  contextPath = "hystrix"
 }
