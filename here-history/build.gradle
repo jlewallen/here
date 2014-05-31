@@ -41,5 +41,4 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.assertj:assertj-core:1.6.0'
     testCompile 'com.sun.jersey:jersey-test-framework:1.18.1'
-    testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jetty:2.9'
 }
