@@ -17,7 +17,7 @@ public class PlaceMapper implements ResultSetMapper<Place> {
          r.getString("street2"),
          r.getString("city"),
          r.getString("state"),
-         r.getString("postalCode")
+         r.getString("postal_code")
       );
       LatLon location = new LatLon(
          r.getFloat("latitude"),

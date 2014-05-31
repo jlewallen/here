@@ -3,6 +3,7 @@ package com.page5of4.here.webapp;
 import com.codahale.metrics.JmxReporter;
 import com.netflix.config.ConfigurationManager;
 import com.page5of4.dropwizard.EurekaClientBundle;
+import com.page5of4.here.checkins.api.rpc.CheckinsRequestFactory;
 import com.page5of4.here.common.DiagnosticsResource;
 import com.page5of4.here.places.api.rpc.PlacesRequestFactory;
 import com.page5of4.here.profiles.api.rpc.ProfilesRequestFactory;
@@ -31,17 +32,21 @@ public class Main extends Application<WebAppConfiguration> {
       properties.put("here-profiles-api.ribbon.DeploymentContextBasedVipAddresses", "here-profiles.page5of4.com");
       properties.put("here-places-api.ribbon.NIWSServerListClassName", "com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList");
       properties.put("here-places-api.ribbon.DeploymentContextBasedVipAddresses", "here-places.page5of4.com");
+      properties.put("here-checkins-api.ribbon.NIWSServerListClassName", "com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList");
+      properties.put("here-checkins-api.ribbon.DeploymentContextBasedVipAddresses", "here-checkins.page5of4.com");
       ConfigurationManager.loadProperties(properties);
 
       JmxReporter.forRegistry(environment.metrics()).build().start();
 
       new ProfilesRequestFactory();
       new PlacesRequestFactory();
+      new CheckinsRequestFactory();
 
       environment.jersey().register(DiagnosticsResource.class);
       environment.jersey().register(RegistrationResource.class);
       environment.jersey().register(AvailablePlacesResource.class);
       environment.jersey().register(BusinessOwnerResource.class);
+      environment.jersey().register(CheckinResource.class);
    }
 }
 

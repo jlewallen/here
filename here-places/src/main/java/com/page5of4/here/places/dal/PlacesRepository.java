@@ -10,7 +10,7 @@ import java.util.List;
 
 @RegisterMapper(PlaceMapper.class)
 public interface PlacesRepository {
-   @SqlUpdate("INSERT INTO places (id, name, description, street1, street2, city, state, postalCode, latitude, longitude) values (:id, :name, :description, :street1, :street2, :city, :state, :postalCode, :latitude, :longitude)")
+   @SqlUpdate("INSERT INTO places (id, name, description, street1, street2, city, state, postal_code, latitude, longitude) values (:id, :name, :description, :street1, :street2, :city, :state, :postalCode, :latitude, :longitude)")
    void add(@Bind("id") String id, @Bind("name") String name, @Bind("description") String description, @Bind("street1") String street1, @Bind("street2") String street2, @Bind("city") String city, @Bind("state") String state, @Bind("postalCode") String postalCode, @Bind("latitude") float latitude, @Bind("longitude") float longitude);
 
    @SqlQuery("SELECT * FROM places WHERE id = :id")

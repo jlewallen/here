@@ -6,6 +6,16 @@ define(['text!./dashboard.html', 'layout/default-layout', 'app/angular-module'],
 		defaultResource("profile").get().then(function(profile) {
 			$scope.profile = profile;
 		});
+
+		defaultResource("available-places").get().then(function(places) {
+			$scope.places = places;
+		});
+
+		$scope.checkin = function(place) {
+			defaultResource("places", place.id, "checkins").post({}).then(function(checkin) {
+				console.log(checkin);
+			});
+		};
 	}
 
 	return {

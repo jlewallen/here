@@ -1,3 +1,20 @@
-<div class="ng-cloak">
+<div class="ng-cloak container">
     <h3>Welcome {{profile.firstName}} {{profile.lastName}}!</h3>
+
+    <div class="fluid-row">
+        <div class="place col-sm-4" ng-repeat="place in places">
+            <h4>{{place.name}}</h4>
+            <p>{{place.description}}</p>
+            <div class="address">
+                {{place.address.street1}}
+                {{place.address.street2}}<br/>
+                {{place.address.city}},
+                {{place.address.state}}
+                {{place.address.postalCode}}
+            </div>
+            <div class="actions">
+                <button type="button" class="btn btn-sm btn-primary" ng-click="checkin(place)">Checkin</button>
+            </div>
+        </div>
+    </div>
 </div>

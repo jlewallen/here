@@ -1,6 +1,5 @@
-package com.page5of4.here.places;
+package com.page5of4.here.checkins;
 
-import com.page5of4.here.places.dal.PlacesRepository;
 import dagger.Module;
 import dagger.Provides;
 import io.dropwizard.db.DataSourceFactory;
@@ -11,12 +10,12 @@ import org.skife.jdbi.v2.Handle;
 
 import javax.inject.Singleton;
 
-@Module(injects = { PlacesResource.class })
-public class PlacesModule {
+@Module(injects = { CheckinsResource.class })
+public class CheckinsModule {
    private final Environment environment;
    private final DataSourceFactory dataSourceFactory;
 
-   public PlacesModule(Environment environment, DataSourceFactory dataSourceFactory) {
+   public CheckinsModule(Environment environment, DataSourceFactory dataSourceFactory) {
       this.environment = environment;
       this.dataSourceFactory = dataSourceFactory;
    }
@@ -34,10 +33,10 @@ public class PlacesModule {
 
    @Provides
    @Singleton
-   public PlacesRepository providePlacesRepository(DBI dbi) {
+   public CheckinsRepository provideCheckinsRepository(DBI dbi) {
       try(Handle h = dbi.open()) {
-         h.execute("CREATE TABLE places (id varchar(36) PRIMARY KEY, name VARCHAR(64), description VARCHAR(1024), street1 VARCHAR(32), street2 VARCHAR(32), city VARCHAR(32), state VARCHAR(2), postal_code VARCHAR(10), latitude DECIMAL(10, 6), longitude DECIMAL(10, 6))");
+         h.execute("CREATE TABLE checkins (id varchar(36) PRIMARY KEY, time DATETIME, profile_id varchar(36), place_id varchar(36))");
       }
-      return dbi.onDemand(PlacesRepository.class);
+      return dbi.onDemand(CheckinsRepository.class);
    }
 }
