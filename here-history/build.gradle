@@ -9,4 +9,5 @@ run {
 
 dependencies {
   compile project(':here-history-api')
+  compile project(':here-checkins-api')
 }
