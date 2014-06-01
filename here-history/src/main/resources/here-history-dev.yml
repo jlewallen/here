@@ -28,6 +28,7 @@ logging:
 
 codon:
     name: here-history
-
-broker:
-    port: 7001
+    broker:
+        port: 7001
+    owners:
+        com.page5of4.here.checkins: here-checkins:here-checkins.{messageType}

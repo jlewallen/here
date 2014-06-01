@@ -4,7 +4,6 @@ import com.codahale.metrics.JmxReporter;
 import com.page5of4.codon.dropwizard.CodonBundle;
 import com.page5of4.codon.spring.config.PublisherConfig;
 import com.page5of4.dropwizard.EurekaClientBundle;
-import com.page5of4.dropwizard.activemq.LocalActiveMqBundle;
 import com.page5of4.dropwizard.discovery.zookeeper.ZooKeeperBundle;
 import com.page5of4.here.common.DiagnosticsResource;
 import io.dropwizard.Application;
@@ -20,8 +19,7 @@ public class Main extends Application<HistoryConfiguration> {
    public void initialize(Bootstrap<HistoryConfiguration> bootstrap) {
       bootstrap.addBundle(new EurekaClientBundle());
       bootstrap.addBundle(new ZooKeeperBundle());
-      bootstrap.addBundle(new LocalActiveMqBundle());
-      bootstrap.addBundle(new CodonBundle(HistoryCodonConfig.class, PublisherConfig.class));
+      bootstrap.addBundle(new CodonBundle(HistoryCodonConfig.class, PublisherConfig.class, HistoryModule.class));
    }
 
    @Override

@@ -16,16 +16,16 @@ public class HistoryCodonConfig extends BusConfig {
    @Bean
    @Override
    public BusConfiguration busConfiguration() {
-      return historyConfiguration.getCodonConfiguration().createBusConfiguration(historyConfiguration.getBrokerConfiguration());
+      return historyConfiguration.getCodonConfiguration().createBusConfiguration();
    }
 
    @Bean
    public ActiveMqNetworkManager activeMqNetworkManager(BusConfiguration busConfiguration, HistoryConfiguration historyConfiguration, Subscriber subscriber) {
-      return new ActiveMqNetworkManager(busConfiguration, subscriber, historyConfiguration.getZooKeeper().getCurator(), historyConfiguration.getBrokerConfiguration().createBroker());
+      return new ActiveMqNetworkManager(busConfiguration, subscriber, historyConfiguration.getZooKeeper().getCurator(), historyConfiguration.getCodonConfiguration().getBroker().createBroker());
    }
 
    @Bean
-   public ProfileCheckedInHandler profileCheckedInHandler() {
-      return new ProfileCheckedInHandler();
+   public ProfileCheckedInHandler profileCheckedInHandler(CheckinsResource checkinsResource) {
+      return new ProfileCheckedInHandler(checkinsResource);
    }
 }

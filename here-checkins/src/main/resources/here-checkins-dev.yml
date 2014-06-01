@@ -28,6 +28,5 @@ logging:
 
 codon:
     name: here-checkins
-
-broker:
-    port: 7000
+    broker:
+        port: 7000

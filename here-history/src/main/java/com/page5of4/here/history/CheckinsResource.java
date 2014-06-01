@@ -1,7 +1,4 @@
-package com.page5of4.here.checkins;
-
-import com.page5of4.codon.Bus;
-import com.page5of4.here.checkins.api.messages.ProfileCheckedInMessage;
+package com.page5of4.here.history;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -19,12 +16,10 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 public class CheckinsResource {
    private final CheckinsRepository repository;
-   private final Bus bus;
 
    @Inject
-   public CheckinsResource(CheckinsRepository repository, Bus bus) {
+   public CheckinsResource(CheckinsRepository repository) {
       this.repository = repository;
-      this.bus = bus;
    }
 
    @GET
@@ -47,12 +42,6 @@ public class CheckinsResource {
    @POST
    public Checkin checkin(Checkin checkin) {
       repository.add(checkin.getId().toString(), new Timestamp(new Date().getTime()), checkin.getPlaceId().toString(), checkin.getProfileId().toString());
-      ProfileCheckedInMessage message = new ProfileCheckedInMessage();
-      message.setCheckinId(checkin.getId());
-      message.setTime(checkin.getTime());
-      message.setProfileId(checkin.getProfileId());
-      message.setPlaceId(checkin.getPlaceId());
-      bus.publish(message);
       return repository.getById(checkin.getId().toString());
    }
 }

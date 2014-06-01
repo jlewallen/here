@@ -16,11 +16,11 @@ public class CheckinsCodonConfig extends BusConfig {
    @Bean
    @Override
    public BusConfiguration busConfiguration() {
-      return checkinsConfiguration.getCodonConfiguration().createBusConfiguration(checkinsConfiguration.getBrokerConfiguration());
+      return checkinsConfiguration.getCodonConfiguration().createBusConfiguration();
    }
 
    @Bean
    public ActiveMqNetworkManager activeMqNetworkManager(BusConfiguration busConfiguration, CheckinsConfiguration checkinsConfiguration, Subscriber subscriber) {
-      return new ActiveMqNetworkManager(busConfiguration, subscriber, checkinsConfiguration.getZooKeeper().getCurator(), checkinsConfiguration.getBrokerConfiguration().createBroker());
+      return new ActiveMqNetworkManager(busConfiguration, subscriber, checkinsConfiguration.getZooKeeper().getCurator(), checkinsConfiguration.getCodonConfiguration().getBroker().createBroker());
    }
 }

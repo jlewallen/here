@@ -5,8 +5,6 @@ import com.page5of4.codon.dropwizard.CodonConfiguration;
 import com.page5of4.codon.dropwizard.ConfiguresCodon;
 import com.page5of4.dropwizard.ConfiguresEurekaClient;
 import com.page5of4.dropwizard.EurekaClientConfiguration;
-import com.page5of4.dropwizard.activemq.BrokerConfiguration;
-import com.page5of4.dropwizard.activemq.ConfiguresMessageQueuing;
 import com.page5of4.dropwizard.discovery.zookeeper.ConfiguresZooKeeper;
 import com.page5of4.dropwizard.discovery.zookeeper.ZooKeeperConfiguration;
 import io.dropwizard.Configuration;
@@ -15,7 +13,7 @@ import io.dropwizard.db.DataSourceFactory;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-public class HistoryConfiguration extends Configuration implements ConfiguresEurekaClient, ConfiguresMessageQueuing, ConfiguresCodon, ConfiguresZooKeeper {
+public class HistoryConfiguration extends Configuration implements ConfiguresEurekaClient, ConfiguresCodon, ConfiguresZooKeeper {
    @Valid
    @NotNull
    @JsonProperty("eureka")
@@ -25,10 +23,6 @@ public class HistoryConfiguration extends Configuration implements ConfiguresEur
    @NotNull
    @JsonProperty("database")
    private DataSourceFactory database = new DataSourceFactory();
-
-   @Valid
-   @JsonProperty("broker")
-   private BrokerConfiguration brokerConfiguration = new BrokerConfiguration();
 
    @Valid
    @JsonProperty("codon")
@@ -45,11 +39,6 @@ public class HistoryConfiguration extends Configuration implements ConfiguresEur
 
    public DataSourceFactory getDatabase() {
       return database;
-   }
-
-   @Override
-   public BrokerConfiguration getBrokerConfiguration() {
-      return brokerConfiguration;
    }
 
    @Override

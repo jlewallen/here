@@ -63,6 +63,7 @@ configure(subprojects.findAll(middleTierProjects)) {
     compile "com.yammer.tenacity:tenacity-core:0.3.0"
 
     compile "com.page5of4.dropwizard:dropwizard-karyon:0.1.0-SNAPSHOT"
+    compile "com.page5of4.dropwizard:dropwizard-spring:0.1.0-SNAPSHOT"
     compile "com.page5of4.dropwizard.messaging:dropwizard-activemq:0.1.0-SNAPSHOT"
     compile "com.page5of4.codon:codon-dropwizard:0.1.0-SNAPSHOT"
     compile "com.page5of4.codon:codon-discovery:0.1.0-SNAPSHOT"

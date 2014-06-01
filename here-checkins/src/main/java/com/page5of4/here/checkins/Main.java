@@ -4,13 +4,12 @@ import com.codahale.metrics.JmxReporter;
 import com.page5of4.codon.dropwizard.CodonBundle;
 import com.page5of4.codon.spring.config.PublisherConfig;
 import com.page5of4.dropwizard.EurekaClientBundle;
-import com.page5of4.dropwizard.activemq.LocalActiveMqBundle;
 import com.page5of4.dropwizard.discovery.zookeeper.ZooKeeperBundle;
 import com.page5of4.here.common.DiagnosticsResource;
-import dagger.ObjectGraph;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.springframework.context.ApplicationContext;
 
 public class Main extends Application<CheckinsConfiguration> {
    public static void main(String[] args) throws Exception {
@@ -21,17 +20,16 @@ public class Main extends Application<CheckinsConfiguration> {
    public void initialize(Bootstrap<CheckinsConfiguration> bootstrap) {
       bootstrap.addBundle(new EurekaClientBundle());
       bootstrap.addBundle(new ZooKeeperBundle());
-      bootstrap.addBundle(new LocalActiveMqBundle());
-      bootstrap.addBundle(new CodonBundle(CheckinsCodonConfig.class, PublisherConfig.class));
+      bootstrap.addBundle(new CodonBundle(CheckinsCodonConfig.class, PublisherConfig.class, CheckinsModule.class));
    }
 
    @Override
    public void run(CheckinsConfiguration configuration, Environment environment) {
       JmxReporter.forRegistry(environment.metrics()).build().start();
 
-      ObjectGraph objectGraph = ObjectGraph.create(new CheckinsModule(environment, configuration.getDatabase()));
+      ApplicationContext applicationContext = configuration.getCodonConfiguration().getApplicationContext();
       environment.jersey().register(DiagnosticsResource.class);
-      environment.jersey().register(objectGraph.get(CheckinsResource.class));
+      environment.jersey().register(applicationContext.getBean(CheckinsResource.class));
    }
 }
 
