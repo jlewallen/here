@@ -1,8 +1,8 @@
 package com.page5of4.here.checkins;
 
 import com.codahale.metrics.JmxReporter;
-import com.page5of4.codon.config.PublisherConfig;
 import com.page5of4.codon.dropwizard.CodonBundle;
+import com.page5of4.codon.spring.config.PublisherConfig;
 import com.page5of4.dropwizard.EurekaClientBundle;
 import com.page5of4.dropwizard.activemq.LocalActiveMqBundle;
 import com.page5of4.dropwizard.discovery.zookeeper.ZooKeeperBundle;
