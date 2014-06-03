@@ -4,10 +4,11 @@ apply plugin: 'application'
 mainClassName = 'com.page5of4.here.history.Main'
 
 run {
-  args "server", "build/resources/main/here-history-dev.yml"
+    args "server", "build/resources/main/here-history-dev.yml"
 }
 
 dependencies {
-  compile project(':here-history-api')
-  compile project(':here-checkins-api')
+    compile project(':here-history-api')
+    compile project(':here-checkins-api')
+    compile project(':here-places-api')
 }

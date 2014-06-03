@@ -1,5 +1,10 @@
 package com.page5of4.here.places;
 
+import com.page5of4.codon.Bus;
+import com.page5of4.here.places.api.dto.AddressDto;
+import com.page5of4.here.places.api.dto.LatLonDto;
+import com.page5of4.here.places.api.dto.PlaceDto;
+import com.page5of4.here.places.api.messages.PlaceRegisteredMessage;
 import com.page5of4.here.places.dal.PlacesRepository;
 import com.page5of4.here.places.model.Place;
 
@@ -17,10 +22,12 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 public class PlacesResource {
    private final PlacesRepository repository;
+   private final Bus bus;
 
    @Inject
-   public PlacesResource(PlacesRepository repository) {
+   public PlacesResource(PlacesRepository repository, Bus bus) {
       this.repository = repository;
+      this.bus = bus;
    }
 
    @GET
@@ -47,6 +54,31 @@ public class PlacesResource {
          place.getLocation().getLatitude(),
          place.getLocation().getLongitude()
       );
+
+      PlaceRegisteredMessage message = new PlaceRegisteredMessage();
+      message.setPlaceInfo(createPlaceDto(place));
+      bus.publish(message);
       return place.getId();
+   }
+
+   private PlaceDto createPlaceDto(Place place) {
+      AddressDto address = new AddressDto();
+      address.setStreet1(place.getAddress().getStreet1());
+      address.setStreet2(place.getAddress().getStreet2());
+      address.setCity(place.getAddress().getCity());
+      address.setState(place.getAddress().getState());
+      address.setPostalCode(place.getAddress().getPostalCode());
+
+      LatLonDto location = new LatLonDto();
+      location.setLatitude(place.getLocation().getLatitude());
+      location.setLongitude(place.getLocation().getLongitude());
+
+      PlaceDto placeDto = new PlaceDto();
+      placeDto.setId(place.getId());
+      placeDto.setName(place.getName());
+      placeDto.setDescription(place.getDescription());
+      placeDto.setAddress(address);
+      placeDto.setLocation(location);
+      return placeDto;
    }
 }

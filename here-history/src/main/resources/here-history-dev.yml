@@ -25,6 +25,7 @@ logging:
         org.springframework: WARN
         com.page5of4.codon: INFO
         org.apache.activemq.network: ERROR
+        com.netflix.discovery: WARN
 
 codon:
     name: here-history
@@ -32,3 +33,4 @@ codon:
         port: 7001
     owners:
         com.page5of4.here.checkins: here-checkins:here-checkins.{messageType}
+        com.page5of4.here.places: here-places:here-places.{messageType}

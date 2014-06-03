@@ -1,5 +1,8 @@
 package com.page5of4.here.history;
 
+import com.page5of4.here.history.dal.CheckinsRepository;
+import com.page5of4.here.history.model.Checkin;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

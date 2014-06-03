@@ -1,5 +1,6 @@
-package com.page5of4.here.history;
+package com.page5of4.here.history.dal;
 
+import com.page5of4.here.history.model.Checkin;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;

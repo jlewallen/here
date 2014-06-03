@@ -25,6 +25,7 @@ logging:
         org.springframework: WARN
         com.page5of4.codon: INFO
         org.apache.activemq.network: ERROR
+        com.netflix.discovery: WARN
 
 codon:
     name: here-checkins

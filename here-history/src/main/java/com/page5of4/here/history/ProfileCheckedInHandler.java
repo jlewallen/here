@@ -2,6 +2,7 @@ package com.page5of4.here.history;
 
 import com.page5of4.codon.MessageHandler;
 import com.page5of4.here.checkins.api.messages.ProfileCheckedInMessage;
+import com.page5of4.here.history.model.Checkin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

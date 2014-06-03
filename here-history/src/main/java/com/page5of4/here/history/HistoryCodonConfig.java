@@ -28,4 +28,9 @@ public class HistoryCodonConfig extends BusConfig {
    public ProfileCheckedInHandler profileCheckedInHandler(CheckinsResource checkinsResource) {
       return new ProfileCheckedInHandler(checkinsResource);
    }
+
+   @Bean
+   public PlaceRegisteredHandler placeRegisteredHandler(PlacesResource placesResource) {
+      return new PlaceRegisteredHandler(placesResource);
+   }
 }

@@ -1,4 +1,4 @@
-package com.page5of4.here.history;
+package com.page5of4.here.history.model;
 
 import java.sql.Timestamp;
 import java.util.UUID;
