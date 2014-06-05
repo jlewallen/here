@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProfilesResourceJerseySpecs {
    @ClassRule
-   public static final ResourceTestRule resources = ResourceTestRule.builder().addResource(ProfilesDeps.get().getProfilesResource()).build();
+   public static final ResourceTestRule resources = ResourceTestRule.builder().addResource(ProfilesDeps.get().getBean(ProfilesResource.class)).build();
 
    private static Builder profiles(Object... parts) {
       return resources.client().resource(UrlParts.join("profiles").join(parts).url()).type(MediaType.APPLICATION_JSON_TYPE);

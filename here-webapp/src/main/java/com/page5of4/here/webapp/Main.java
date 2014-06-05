@@ -22,6 +22,7 @@ public class Main extends Application<WebAppConfiguration> {
       bootstrap.addBundle(new AssetsBundle("/assets/", "/assets/", "index.html"));
    }
 
+   @SuppressWarnings("unchecked")
    @Override
    public void run(WebAppConfiguration configuration, Environment environment) {
       JmxReporter.forRegistry(environment.metrics()).build().start();

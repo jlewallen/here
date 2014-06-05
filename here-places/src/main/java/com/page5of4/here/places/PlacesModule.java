@@ -25,6 +25,7 @@ public class PlacesModule {
    @Bean
    public PlacesRepository placesRepository(DBI dbi) {
       try(Handle h = dbi.open()) {
+         h.execute("DROP ALL OBJECTS");
          h.execute("CREATE TABLE places (id varchar(36) PRIMARY KEY, name VARCHAR(64), description VARCHAR(1024), street1 VARCHAR(32), street2 VARCHAR(32), city VARCHAR(32), state VARCHAR(2), postal_code VARCHAR(10), latitude DECIMAL(10, 6), longitude DECIMAL(10, 6))");
       }
       return dbi.onDemand(PlacesRepository.class);

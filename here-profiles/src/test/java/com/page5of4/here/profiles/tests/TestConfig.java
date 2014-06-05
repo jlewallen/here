@@ -1,7 +1,6 @@
-package com.page5of4.here.places.tests;
+package com.page5of4.here.profiles.tests;
 
-import com.page5of4.codon.Bus;
-import com.page5of4.here.places.PlacesModule;
+import com.page5of4.here.profiles.ProfilesModule;
 import com.page5of4.here.tests.DropwizardSpecsHelper;
 import com.page5of4.here.tests.InMemoryDatabase;
 import io.dropwizard.db.DataSourceFactory;
@@ -11,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(PlacesModule.class)
+@Import(ProfilesModule.class)
 public class TestConfig {
    @Bean
    public DataSourceFactory database() {
@@ -21,10 +20,5 @@ public class TestConfig {
    @Bean
    public Environment environment() {
       return DropwizardSpecsHelper.environment();
-   }
-
-   @Bean
-   public Bus bus() {
-      return new FakeBus();
    }
 }

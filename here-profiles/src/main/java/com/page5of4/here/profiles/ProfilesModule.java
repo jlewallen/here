@@ -1,28 +1,17 @@
 package com.page5of4.here.profiles;
 
-import dagger.Module;
-import dagger.Provides;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import javax.inject.Singleton;
-
-@Module(injects = { ProfilesResource.class })
+@Configuration
 public class ProfilesModule {
-   private final Environment environment;
-   private final DataSourceFactory dataSourceFactory;
-
-   public ProfilesModule(Environment environment, DataSourceFactory dataSourceFactory) {
-      this.environment = environment;
-      this.dataSourceFactory = dataSourceFactory;
-   }
-
-   @Provides
-   @Singleton
-   public DBI provideDbi() {
+   @Bean
+   public DBI dbi(Environment environment, DataSourceFactory dataSourceFactory) {
       try {
          return new DBIFactory().build(environment, dataSourceFactory, "db");
       }
@@ -31,12 +20,18 @@ public class ProfilesModule {
       }
    }
 
-   @Provides
-   @Singleton
-   public ProfilesRepository provideProfilesRepository(DBI dbi) {
+   @Bean
+   public ProfilesRepository profilesRepository(DBI dbi) {
       try(Handle h = dbi.open()) {
+         h.execute("DROP ALL OBJECTS");
          h.execute("CREATE TABLE profiles (id varchar(36) PRIMARY KEY, first_name VARCHAR(32), last_name VARCHAR(32), email VARCHAR(32), password VARCHAR(32))");
       }
       return dbi.onDemand(ProfilesRepository.class);
+   }
+
+   @Bean
+
+   public ProfilesResource profilesResource(ProfilesRepository profilesRepository) {
+      return new ProfilesResource(profilesRepository);
    }
 }

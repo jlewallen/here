@@ -1,21 +1,25 @@
 package com.page5of4.here.profiles;
 
 import com.page5of4.here.profiles.api.dto.SignupInfoDto;
-import com.page5of4.here.profiles.tests.ProfilesDeps;
+import com.page5of4.here.profiles.tests.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProfilesResourceSpecs {
-   protected ProfilesDeps deps;
-
-   @Before
-   public void setup() {
-      deps = ProfilesDeps.get();
-   }
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TestConfig.class)
+public abstract class ProfilesResourceSpecs {
+   @Autowired
+   protected ProfilesResource profilesResource;
+   @Autowired
+   protected ProfilesRepository profilesRepository;
 
    public static class when_signing_up extends ProfilesResourceSpecs {
       private SignupInfoDto info;
@@ -28,12 +32,12 @@ public class ProfilesResourceSpecs {
          info.setLastName("Lewallen");
          info.setEmail("test@test.com");
          info.setPassword("asdfasdf");
-         deps.getProfilesResource().signup(info);
+         profilesResource.signup(info);
       }
 
       @Test
       public void should_add_the_user_and_they_should_be_retrievable() {
-         Profile saved = deps.getProfilesRepository().getById(info.getId().toString());
+         Profile saved = profilesRepository.getById(info.getId().toString());
          assertThat(saved).isNotNull();
          assertThat(saved.getFirstName()).isEqualTo("Jacob");
          assertThat(saved.getLastName()).isEqualTo("Lewallen");
