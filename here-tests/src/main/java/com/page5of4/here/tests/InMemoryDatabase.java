@@ -1,4 +1,4 @@
-package com.page5of4.here.profiles.tests;
+package com.page5of4.here.tests;
 
 import io.dropwizard.db.DataSourceFactory;
 

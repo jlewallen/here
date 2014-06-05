@@ -3,6 +3,8 @@ package com.page5of4.here.profiles.tests;
 import com.page5of4.here.profiles.ProfilesModule;
 import com.page5of4.here.profiles.ProfilesRepository;
 import com.page5of4.here.profiles.ProfilesResource;
+import com.page5of4.here.tests.DropwizardSpecsHelper;
+import com.page5of4.here.tests.InMemoryDatabase;
 import dagger.ObjectGraph;
 
 import javax.inject.Inject;

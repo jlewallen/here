@@ -2,6 +2,7 @@ package com.page5of4.here.places;
 
 import com.page5of4.codon.Bus;
 import com.page5of4.here.places.dal.PlacesRepository;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
@@ -12,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PlacesModule {
    @Bean
-   public DBI dbi(Environment environment, PlacesConfiguration placesConfiguration) {
+   public DBI dbi(Environment environment, DataSourceFactory database) {
       try {
-         return new DBIFactory().build(environment, placesConfiguration.getDatabase(), "db");
+         return new DBIFactory().build(environment, database, "db");
       }
       catch(ClassNotFoundException e) {
          throw new RuntimeException(e);

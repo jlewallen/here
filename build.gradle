@@ -26,7 +26,8 @@ ext.libraries = [
   ],
   testing: [
     "junit:junit:4.11",
-    "org.assertj:assertj-core:1.6.0"
+    "org.assertj:assertj-core:1.6.0",
+    "org.springframework:spring-test:3.2.8.RELEASE"
   ]
 ]
 
@@ -72,6 +73,7 @@ configure(subprojects.findAll(middleTierProjects)) {
     testCompile "com.sun.jersey:jersey-test-framework:1.18.1"
     testCompile "io.dropwizard:dropwizard-testing:$DropwizardVersion"
     testCompile libraries.testing
+    testCompile project(':here-tests')
   }
 }
 

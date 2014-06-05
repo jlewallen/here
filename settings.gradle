@@ -1,1 +1,1 @@
-include 'here-infrastructure', 'here-webapp', 'here-profiles', 'here-profiles-api', 'here-places', 'here-places-api', 'here-history', 'here-history-api', 'here-checkins', 'here-checkins-api'
+include 'here-infrastructure', 'here-tests', 'here-webapp', 'here-profiles', 'here-profiles-api', 'here-places', 'here-places-api', 'here-history', 'here-history-api', 'here-checkins', 'here-checkins-api'
