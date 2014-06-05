@@ -14,6 +14,10 @@ def middleTierProjects = {
   !it.name.endsWith('-api') && !it.name.endsWith('-infrastructure') && !it.name.endsWith('-webapp') 
 }
 
+def infrastructureProjects = {
+  it.name.endsWith('-infrastructure')
+}
+
 ext.libraries = [
   feign: [
     "com.netflix.feign:feign-core:$FeignVersion",
@@ -40,6 +44,15 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+    }
+}
+
+configure(subprojects.findAll(infrastructureProjects)) {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    dependencies {
+        compile libraries.feign
     }
 }
 

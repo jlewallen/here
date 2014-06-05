@@ -4,7 +4,6 @@ import com.page5of4.here.common.ClientRequestFactory;
 import feign.Feign;
 import feign.jackson.JacksonModule;
 import feign.jaxrs.JAXRSModule;
-import feign.ribbon.LoadBalancingTarget;
 
 public class PlacesRequestFactory extends ClientRequestFactory {
    private static PlacesApiRequests api;
@@ -26,6 +25,6 @@ public class PlacesRequestFactory extends ClientRequestFactory {
    @Override
    public void configure() {
       super.configure();
-      api = Feign.create(LoadBalancingTarget.create(PlacesApiRequests.class, getLoadBalancerTargetName()), new JacksonModule(), new JAXRSModule());
+      api = Feign.create(feignTarget(PlacesApiRequests.class), new JacksonModule(), new JAXRSModule());
    }
 }

@@ -4,7 +4,6 @@ import com.page5of4.here.common.ClientRequestFactory;
 import feign.Feign;
 import feign.jackson.JacksonModule;
 import feign.jaxrs.JAXRSModule;
-import feign.ribbon.LoadBalancingTarget;
 
 public class CheckinsRequestFactory extends ClientRequestFactory {
    private static CheckinsApiRequests api;
@@ -26,6 +25,6 @@ public class CheckinsRequestFactory extends ClientRequestFactory {
    @Override
    public void configure() {
       super.configure();
-      api = Feign.create(LoadBalancingTarget.create(CheckinsApiRequests.class, getLoadBalancerTargetName()), new JacksonModule(), new JAXRSModule());
+      api = Feign.create(feignTarget(CheckinsApiRequests.class), new JacksonModule(), new JAXRSModule());
    }
 }
